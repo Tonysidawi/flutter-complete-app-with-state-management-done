@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_getx/recent_contest.dart';
 import 'package:get/get.dart';
 
 import 'my_detail_page.dart';
@@ -261,7 +262,15 @@ class _ContentPageState extends State<ContentPage> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Color(0xFFfdc33c)),
-                    child: GestureDetector(),
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => RecentContest());
+                      },
+                      child: Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white,
+                      ),
+                    ),
                   )
                 ],
               ),
@@ -305,7 +314,7 @@ class _ContentPageState extends State<ContentPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Status",
+                                        list[i]['status'],
                                         style: TextStyle(
                                             color: Color(0xFFfdebb2),
                                             fontSize: 12,
@@ -317,9 +326,9 @@ class _ContentPageState extends State<ContentPage> {
                                       SizedBox(
                                         width: 160,
                                         child: Text(
-                                          list[i]['status'],
+                                          list[i]['text'],
                                           style: TextStyle(
-                                              color: Colors.orange,
+                                              color: Colors.black,
                                               fontSize: 18,
                                               decoration: TextDecoration.none),
                                         ),

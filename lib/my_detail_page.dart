@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_getx/detail_controller.dart';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,8 @@ class _DetailPageState extends State<DetailPage> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     int _currentIndex = 0;
+    // favorite function logic
+    final DetailedController fav = Get.put(DetailedController());
     return Scaffold(
       body: Container(
         color: Color(0xFFc5e5f3),
@@ -43,8 +46,13 @@ class _DetailPageState extends State<DetailPage> {
                 top: 50,
                 left: 10,
                 child: IconButton(
-                  onPressed: () => Get.back(),
-                  icon: Icon(Icons.arrow_back_ios),
+                  onPressed: () => Get.to(() {
+                    return ContentPage();
+                  }),
+                  icon: Icon(
+                    Icons.home_outlined,
+                    color: Colors.white,
+                  ),
                 )),
             Positioned(
               top: 120,
@@ -311,13 +319,18 @@ class _DetailPageState extends State<DetailPage> {
                 child: Row(
                   children: [
                     Container(
-                        width: 60,
-                        height: 60,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Color(0xFFfbc33e)),
-                        child:
-                            Icon(Icons.favorite_border, color: Colors.white)),
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Color(0xFFfbc33e)),
+                      child: IconButton(
+                        icon: Icon(Icons.favorite_border, color: Colors.white),
+                        onPressed: () {
+                          fav.favCounter();
+                        },
+                      ),
+                    ),
                     SizedBox(
                       width: 10,
                     ),
